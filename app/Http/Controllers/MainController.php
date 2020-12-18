@@ -13,10 +13,31 @@ class MainController extends Controller
         $tr->setSource('en');
         $tr->setTarget('fa');
 
-        $data = [
+        return [
             'translate' => $tr->translate($request->text),
         ];
+    }
 
-        return $data;
+    public function organize(Request $request)
+    {
+        $result = preg_replace('/\t|\n|\r/', " ", $request->text);
+        $result = preg_replace('/\t|\.|\r/', ".\n", $result);
+        $result = preg_replace('/^\s/m', "\n", $result);
+
+        return [
+            'organize' => $result,
+        ];
+    }
+
+    public function organizeTranslate(Request $request)
+    {
+        $organize = $this->organize($request);
+        $request->text = $organize['organize'];
+        $translate = $this->translate($request);
+
+        return [
+            'organize' => $organize['organize'],
+            'translate' => $translate['translate'],
+        ];
     }
 }

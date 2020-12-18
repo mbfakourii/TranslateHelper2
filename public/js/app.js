@@ -17584,7 +17584,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    -webkit-animation: App-logo-spin infinite 20s linear;\n            animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n\n.App-header {\n  background-color: #ffffff;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@-webkit-keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n", ""]);
+exports.push([module.i, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    -webkit-animation: App-logo-spin infinite 20s linear;\n            animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n\n.App-header {\n  background-color: #ffffff;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n.text-file-size {\n  width: 70%;\n}\n\n.text-file-size-rtl {\n  width: 70%;\n  direction: rtl;\n}\n\n@-webkit-keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n", ""]);
 
 // exports
 
@@ -53831,31 +53831,35 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Example = /*#__PURE__*/function (_Component) {
-  _inherits(Example, _Component);
+var Main = /*#__PURE__*/function (_Component) {
+  _inherits(Main, _Component);
 
-  var _super = _createSuper(Example);
+  var _super = _createSuper(Main);
 
-  function Example(props) {
+  function Main(props) {
     var _this;
 
-    _classCallCheck(this, Example);
+    _classCallCheck(this, Main);
 
     _this = _super.call(this, props);
     _this.state = {
-      value: '',
+      raw_text: '',
+      organize_text: '',
+      translate_text: '',
       loadingBarProgress: 0
     };
     _this.onChangeValue = _this.onChangeValue.bind(_assertThisInitialized(_this));
-    _this.onSubmitButton = _this.onSubmitButton.bind(_assertThisInitialized(_this));
+    _this.translate = _this.translate.bind(_assertThisInitialized(_this));
+    _this.organize = _this.organize.bind(_assertThisInitialized(_this));
+    _this.copyTranslateText = _this.copyTranslateText.bind(_assertThisInitialized(_this));
+    _this.organizeTranslate = _this.organizeTranslate.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Example, [{
+  _createClass(Main, [{
     key: "add",
     value: function add(value) {
       this.setState({
-        value: this.state.value,
         loadingBarProgress: this.state.loadingBarProgress + value
       });
     }
@@ -53863,7 +53867,6 @@ var Example = /*#__PURE__*/function (_Component) {
     key: "complete",
     value: function complete() {
       this.setState({
-        value: this.state.value,
         loadingBarProgress: 100
       });
     }
@@ -53871,7 +53874,6 @@ var Example = /*#__PURE__*/function (_Component) {
     key: "onLoaderFinished",
     value: function onLoaderFinished() {
       this.setState({
-        value: this.state.value,
         loadingBarProgress: 0
       });
     }
@@ -53881,12 +53883,12 @@ var Example = /*#__PURE__*/function (_Component) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }, {
-    key: "onSubmitButton",
-    value: function onSubmitButton() {
+    key: "translate",
+    value: function translate() {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/translate', {
-        text: this.state.value
+        text: this.state.organize_text
       }, {
         onUploadProgress: function onUploadProgress(progressEvent) {
           _this2.add(Math.round(progressEvent.loaded * 100 / progressEvent.total));
@@ -53894,11 +53896,8 @@ var Example = /*#__PURE__*/function (_Component) {
       }).then(function (response) {
         _this2.complete();
 
-        console.log(response.data);
-
         _this2.setState({
-          value: response.data.translate,
-          description: 'ff'
+          translate_text: response.data.translate
         });
       })["catch"](function (error) {
         _this2.onLoaderFinished();
@@ -53907,9 +53906,63 @@ var Example = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "organizeTranslate",
+    value: function organizeTranslate() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/organizeTranslate', {
+        text: this.state.raw_text
+      }, {
+        onUploadProgress: function onUploadProgress(progressEvent) {
+          _this3.add(Math.round(progressEvent.loaded * 100 / progressEvent.total));
+        }
+      }).then(function (response) {
+        _this3.complete();
+
+        _this3.setState({
+          organize_text: response.data.organize,
+          translate_text: response.data.translate
+        });
+
+        _this3.copyTranslateText();
+      })["catch"](function (error) {
+        _this3.onLoaderFinished();
+
+        console.log(error);
+      });
+    }
+  }, {
+    key: "organize",
+    value: function organize() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/organize', {
+        text: this.state.raw_text
+      }, {
+        onUploadProgress: function onUploadProgress(progressEvent) {
+          _this4.add(Math.round(progressEvent.loaded * 100 / progressEvent.total));
+        }
+      }).then(function (response) {
+        _this4.complete();
+
+        _this4.setState({
+          organize_text: response.data.organize
+        });
+      })["catch"](function (error) {
+        _this4.onLoaderFinished();
+
+        console.log(error);
+      });
+    }
+  }, {
+    key: "copyTranslateText",
+    value: function copyTranslateText() {
+      navigator.clipboard.writeText(this.state.translate_text);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "App"
@@ -53920,83 +53973,64 @@ var Example = /*#__PURE__*/function (_Component) {
         loaderSpeed: 700,
         transitionTime: 10,
         onLoaderFinished: function onLoaderFinished() {
-          return _this3.onLoaderFinished();
+          return _this5.onLoaderFinished();
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         className: "App-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "logo.png",
         width: "150px"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
         variant: "contained",
         color: "primary",
-        onClick: this.onSubmitButton
+        onClick: this.organizeTranslate
       }, "\u0645\u0631\u062A\u0628 \u06A9\u0631\u062F\u0646 \u0648 \u062A\u0631\u062C\u0645\u0647 \u0648 \u06A9\u067E\u06CC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "value",
-        label: "\u0645\u062A\u0646 \u062E\u0648\u062F \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F",
+        name: "raw_text",
+        label: "\u0645\u062A\u0646 \u0627\u0635\u0644\u06CC",
         multiline: true,
+        className: "text-file-size",
         variant: "outlined",
-        value: this.state.value,
+        value: this.state.raw_text,
         onChange: this.onChangeValue
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        variant: "contained",
-        color: "primary"
-      }, "\u0645\u0631\u062A\u0628 \u06A9\u0631\u062F\u0646"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        id: "outlined-textarea",
-        label: "\u0645\u062A\u0646 \u0645\u0631\u062A\u0628 \u0634\u062F\u0647",
-        multiline: true,
-        variant: "outlined"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
         variant: "contained",
         color: "primary",
-        onClick: true
-      }, "\u062A\u0631\u062C\u0645\u0647"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        id: "outlined-textarea",
-        label: "\u0645\u062A\u0646 \u062A\u0631\u062C\u0645\u0647 \u0634\u062F\u0647",
+        onClick: this.organize
+      }, "\u0645\u0631\u062A\u0628 \u06A9\u0631\u062F\u0646"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "organize_text",
+        label: "\u0645\u062A\u0646 \u0645\u0631\u062A\u0628 \u0634\u062F\u0647",
         multiline: true,
-        variant: "outlined"
+        variant: "outlined",
+        className: "text-file-size",
+        value: this.state.organize_text,
+        onChange: this.onChangeValue
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
         variant: "contained",
-        color: "primary"
+        color: "primary",
+        onClick: this.translate
+      }, "\u062A\u0631\u062C\u0645\u0647"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "translate_text",
+        label: "\u0645\u062A\u0646 \u062A\u0631\u062C\u0645\u0647 \u0634\u062F\u0647",
+        multiline: true,
+        className: "text-file-size , text-file-size-rtl",
+        variant: "outlined",
+        value: this.state.translate_text,
+        onChange: this.onChangeValue
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        variant: "contained",
+        color: "primary",
+        onClick: this.copyTranslateText
       }, "\u06A9\u067E\u06CC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, "Example Component"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.onSubmitButton
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        name: "name",
-        className: "form-control",
-        value: this.state.name,
-        onChange: this.onChangeValue
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        className: "form-control",
-        name: "description",
-        value: this.state.description,
-        onChange: this.onChangeValue
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-success"
-      }, "Submit")))))));
     }
   }]);
 
-  return Example;
+  return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Example);
+/* harmony default export */ __webpack_exports__["default"] = (Main);
 
-if (document.getElementById('example')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
+if (document.getElementById('content')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Main, null), document.getElementById('content'));
 }
 
 /***/ }),

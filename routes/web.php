@@ -15,7 +15,8 @@ use App\Http\Controllers\MainController;
 */
 
 Route::post('translate', [MainController::class, 'translate']);
-
+Route::post('organize', [MainController::class, 'organize']);
+Route::post('organizeTranslate', [MainController::class, 'organizeTranslate']);
 
 Route::get('/', function () {
     return view('home');

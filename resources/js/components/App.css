@@ -29,6 +29,15 @@
   color: #61dafb;
 }
 
+.text-file-size {
+  width: 70%;
+}
+
+.text-file-size-rtl {
+  width: 70%;
+  direction: rtl;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

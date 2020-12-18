@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>کمک یار ترجمه</title>
     <!-- Styles -->
-    <!-- <link href="{{ asset('css/apprequire('./bootstrap')
-.css') }}" rel="stylesheet"> -->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 
 <body>
-
-    <div id="example"></div>
+    <div id="content"></div>
 
     <!-- React root DOM -->
     <!-- <div id="user"></div> -->
