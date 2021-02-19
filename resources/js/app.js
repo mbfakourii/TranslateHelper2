@@ -13,3 +13,4 @@
  */
 
 require('./components/Main');
+require('./components/Main2');

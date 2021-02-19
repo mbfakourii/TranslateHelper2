@@ -5,8 +5,9 @@ import './App.css';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import LoadingBar from "react-top-loading-bar";
+import { Checkbox } from '@material-ui/core';
 
-class Main extends Component {
+class Main2 extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -125,7 +126,6 @@ class Main extends Component {
                 <header className="App-header">
                     <img src="logo.png" width="150px"></img>
                     <br />
-                    <br />
                     <Button variant="contained" color="primary" onClick={this.organizeTranslate}>مرتب کردن و ترجمه و کپی</Button>
                     <br />
                     <br />
@@ -137,6 +137,7 @@ class Main extends Component {
                         className="text-file-size"
                         variant="outlined"
                         value={this.state.raw_text}
+                        onSelect={event => { console.log(this.selectedText) }}
                         onChange={this.onChangeValue}
                     />
                     <br />
@@ -177,12 +178,61 @@ class Main extends Component {
                     <Button variant="contained" color="primary" onClick={this.copyTranslateText}>کپی</Button>
                     <br />
                     <br />
+
+                    <h4 style={{ color: 'black' }}>ترجمه دستی خط به خط</h4>
+                    <div className="text-file-size2 " style={{ fontSize: 15, color: 'black', direction: 'rtl', textAlign: 'right' }}>
+                        <Checkbox />
+                        {'ترجمه انتخابی'}
+                    </div>
+                    <TextField
+                        name="translate_text"
+                        label="متن انگلیسی"
+                        multiline
+                        className="text-file-size , text-file-size-rtl"
+                        variant="outlined"
+                        value={this.state.translate_text}
+                        onChange={this.onChangeValue}
+                    />
+                    <br />
+                    <br />
+                    <Button variant="contained" color="primary" onClick={this.copyTranslateText}>ترجمه</Button>
+                    <br />
+                    <br />
+                    <TextField
+                        name="translate_text"
+                        label="متن فارسی"
+                        multiline
+                        className="text-file-size , text-file-size-rtl"
+                        variant="outlined"
+                        value={this.state.translate_text}
+                        onChange={this.onChangeValue}
+                    />
+                    <br />
+                    <br />
+                    <div>
+                        <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}> خط قبلی</Button>
+
+                        <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}> خط بعدی</Button>
+                    </div>
+                    <br />
+                    <TextField
+                        name="translate_text"
+                        label="متن ترجمه شده"
+                        multiline
+                        className="text-file-size , text-file-size-rtl"
+                        variant="outlined"
+                        value={this.state.translate_text}
+                        onChange={this.onChangeValue}
+                    />
+                    <br />
+                    <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}>کپی</Button>
+                    <br />
                 </header>
-            </div>
+            </div >
         );
     }
 }
-export default Main;
-if (document.getElementById('content')) {
-    ReactDOM.render(<Main />, document.getElementById('content'));
+export default Main2;
+if (document.getElementById('content2')) {
+    ReactDOM.render(<Main2 />, document.getElementById('content2'));
 }

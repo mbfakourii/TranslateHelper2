@@ -16,7 +16,7 @@
 .App-header {
   background-color: #ffffff;
   min-height: 100vh;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -24,14 +24,20 @@
   color: white;
 }
 
+
 .App-link {
   color: #61dafb;
 }
 
+.divider{
+  margin: 10px 5px 0 0;
+}
 .text-file-size {
   width: 70%;
 }
-
+.text-file-size2 {
+  width: 85%;
+}
 .text-file-size-rtl {
   direction: rtl;
 }

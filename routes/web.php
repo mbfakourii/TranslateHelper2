@@ -21,3 +21,11 @@ Route::post('organizeTranslate', [MainController::class, 'organizeTranslate']);
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/develop', function () {
+    return view('develop');
+});
+
+Route::get('/aa', function () {
+   echo ":D";
+});
