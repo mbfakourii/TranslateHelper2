@@ -82053,7 +82053,7 @@ var Main = /*#__PURE__*/function (_Component) {
         className: "App-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "logo.png",
-        width: "150px"
+        width: "20%"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
         variant: "contained",
         color: "primary",
@@ -82323,7 +82323,7 @@ var Main2 = /*#__PURE__*/function (_Component) {
         className: "text-file-size",
         variant: "outlined",
         value: this.state.raw_text,
-        onSelect: function onSelect(event) {
+        onSelect: function onSelect() {
           console.log(_this5.selectedText);
         },
         onChange: this.onChangeValue

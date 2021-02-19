@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './App.css';
@@ -30,11 +30,11 @@ class Main extends Component {
     };
 
     complete() {
-        this.setState({ loadingBarProgress: 100 });
+        this.setState({loadingBarProgress: 100});
     };
 
     onLoaderFinished() {
-        this.setState({ loadingBarProgress: 0 });
+        this.setState({loadingBarProgress: 0});
     };
 
     onChangeValue(e) {
@@ -62,7 +62,6 @@ class Main extends Component {
                 console.log(error);
             });
     }
-
 
 
     organizeTranslate() {
@@ -123,12 +122,13 @@ class Main extends Component {
                     onLoaderFinished={() => this.onLoaderFinished()}
                 />
                 <header className="App-header">
-                    <img src="logo.png" width="150px"></img>
-                    <br />
-                    <br />
-                    <Button variant="contained" color="primary" onClick={this.organizeTranslate}>مرتب کردن و ترجمه و کپی</Button>
-                    <br />
-                    <br />
+                    <img src="logo.png" width="20%"/>
+                    <br/>
+                    <br/>
+                    <Button variant="contained" color="primary" onClick={this.organizeTranslate}>مرتب کردن و ترجمه و
+                        کپی</Button>
+                    <br/>
+                    <br/>
 
                     <TextField
                         name="raw_text"
@@ -139,13 +139,13 @@ class Main extends Component {
                         value={this.state.raw_text}
                         onChange={this.onChangeValue}
                     />
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.organize}>مرتب کردن</Button>
 
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <TextField
                         name="organize_text"
                         label="متن مرتب شده"
@@ -156,12 +156,12 @@ class Main extends Component {
                         onChange={this.onChangeValue}
                     />
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.translate}>ترجمه</Button>
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <TextField
                         name="translate_text"
                         label="متن ترجمه شده"
@@ -172,17 +172,18 @@ class Main extends Component {
                         onChange={this.onChangeValue}
                     />
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.copyTranslateText}>کپی</Button>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                 </header>
             </div>
         );
     }
 }
+
 export default Main;
 if (document.getElementById('content')) {
-    ReactDOM.render(<Main />, document.getElementById('content'));
+    ReactDOM.render(<Main/>, document.getElementById('content'));
 }

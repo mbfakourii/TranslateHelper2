@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import LoadingBar from "react-top-loading-bar";
-import { Checkbox } from '@material-ui/core';
+import {Checkbox} from '@material-ui/core';
 
 class Main2 extends Component {
     constructor(props) {
@@ -31,11 +31,11 @@ class Main2 extends Component {
     };
 
     complete() {
-        this.setState({ loadingBarProgress: 100 });
+        this.setState({loadingBarProgress: 100});
     };
 
     onLoaderFinished() {
-        this.setState({ loadingBarProgress: 0 });
+        this.setState({loadingBarProgress: 0});
     };
 
     onChangeValue(e) {
@@ -63,7 +63,6 @@ class Main2 extends Component {
                 console.log(error);
             });
     }
-
 
 
     organizeTranslate() {
@@ -124,11 +123,12 @@ class Main2 extends Component {
                     onLoaderFinished={() => this.onLoaderFinished()}
                 />
                 <header className="App-header">
-                    <img src="logo.png" width="150px"></img>
-                    <br />
-                    <Button variant="contained" color="primary" onClick={this.organizeTranslate}>مرتب کردن و ترجمه و کپی</Button>
-                    <br />
-                    <br />
+                    <img src="logo.png" width="150px"/>
+                    <br/>
+                    <Button variant="contained" color="primary" onClick={this.organizeTranslate}>مرتب کردن و ترجمه و
+                        کپی</Button>
+                    <br/>
+                    <br/>
 
                     <TextField
                         name="raw_text"
@@ -137,16 +137,18 @@ class Main2 extends Component {
                         className="text-file-size"
                         variant="outlined"
                         value={this.state.raw_text}
-                        onSelect={event => { console.log(this.selectedText) }}
+                        onSelect={() => {
+                            console.log(this.selectedText)
+                        }}
                         onChange={this.onChangeValue}
                     />
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.organize}>مرتب کردن</Button>
 
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <TextField
                         name="organize_text"
                         label="متن مرتب شده"
@@ -157,12 +159,12 @@ class Main2 extends Component {
                         onChange={this.onChangeValue}
                     />
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.translate}>ترجمه</Button>
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <TextField
                         name="translate_text"
                         label="متن ترجمه شده"
@@ -173,15 +175,16 @@ class Main2 extends Component {
                         onChange={this.onChangeValue}
                     />
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.copyTranslateText}>کپی</Button>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
 
-                    <h4 style={{ color: 'black' }}>ترجمه دستی خط به خط</h4>
-                    <div className="text-file-size2 " style={{ fontSize: 15, color: 'black', direction: 'rtl', textAlign: 'right' }}>
-                        <Checkbox />
+                    <h4 style={{color: 'black'}}>ترجمه دستی خط به خط</h4>
+                    <div className="text-file-size2 "
+                         style={{fontSize: 15, color: 'black', direction: 'rtl', textAlign: 'right'}}>
+                        <Checkbox/>
                         {'ترجمه انتخابی'}
                     </div>
                     <TextField
@@ -193,11 +196,11 @@ class Main2 extends Component {
                         value={this.state.translate_text}
                         onChange={this.onChangeValue}
                     />
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.copyTranslateText}>ترجمه</Button>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <TextField
                         name="translate_text"
                         label="متن فارسی"
@@ -207,14 +210,16 @@ class Main2 extends Component {
                         value={this.state.translate_text}
                         onChange={this.onChangeValue}
                     />
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <div>
-                        <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}> خط قبلی</Button>
+                        <Button variant="contained" color="primary" style={{margin: 10}}
+                                onClick={this.copyTranslateText}> خط قبلی</Button>
 
-                        <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}> خط بعدی</Button>
+                        <Button variant="contained" color="primary" style={{margin: 10}}
+                                onClick={this.copyTranslateText}> خط بعدی</Button>
                     </div>
-                    <br />
+                    <br/>
                     <TextField
                         name="translate_text"
                         label="متن ترجمه شده"
@@ -224,15 +229,17 @@ class Main2 extends Component {
                         value={this.state.translate_text}
                         onChange={this.onChangeValue}
                     />
-                    <br />
-                    <Button variant="contained" color="primary" style={{ margin: 10 }} onClick={this.copyTranslateText}>کپی</Button>
-                    <br />
+                    <br/>
+                    <Button variant="contained" color="primary" style={{margin: 10}}
+                            onClick={this.copyTranslateText}>کپی</Button>
+                    <br/>
                 </header>
-            </div >
+            </div>
         );
     }
 }
+
 export default Main2;
 if (document.getElementById('content2')) {
-    ReactDOM.render(<Main2 />, document.getElementById('content2'));
+    ReactDOM.render(<Main2/>, document.getElementById('content2'));
 }
