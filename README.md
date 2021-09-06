@@ -1,6 +1,6 @@
-## Version 2 Translate Helper
+## Translate Helper 2
 
-Demo in [Translate Helper](https://www.mbfakouri.ir/translate-helper/)
+Demo in [Translate Helper 2](https://www.mbfakouri.ir/translate-helper/)
 
 ## License
 
