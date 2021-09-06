@@ -1,4 +1,4 @@
-Version 2 Translate Helper
+## Version 2 Translate Helper
 
 Demo in [Translate Helper](https://www.mbfakouri.ir/translate-helper/)
 
